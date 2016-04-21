@@ -336,6 +336,7 @@ public class MyRenderKitUtils {
 	 * @throws IOException
 	 *             if an error occurs writing the attributes
 	 */
+	
 	public static void renderPassThruAttributes(FacesContext context, ResponseWriter writer, UIComponent component,
 			Attribute[] attributes, Map<String, List<ClientBehavior>> behaviors) throws IOException {
 
@@ -1614,12 +1615,16 @@ public class MyRenderKitUtils {
 
 	// !Modified! : add appropriate inline attr for no inline js
 	// Original : Returns the script for a single Behavior
-	private static void getSingleBehaviorHandler(FacesContext context, UIComponent component, ClientBehavior behavior,
+	private static void setSingleBehaviorHandler(FacesContext context, UIComponent component, ClientBehavior behavior,
 			Collection<ClientBehaviorContext.Parameter> params, String behaviorEventName, String submitTarget,
-			boolean needsSubmit) {
+			boolean needsSubmit, ResponseWriter writer) throws IOException {
 
 		ClientBehaviorContext bContext = createClientBehaviorContext(context, component, behaviorEventName, params);
-
+		//TODO : Seems like originally if no renderer was found the script was null, maybe what's under this is not totally correct then.
+		// see ClientBehaviorBase.getScript()
+		MyAjaxBehaviorRenderer renderer = new MyAjaxBehaviorRenderer();
+		renderer.buildCommands(writer, component, behavior, bContext);
+		
 //		String script = behavior.getScript(bContext);
 //
 //		boolean preventDefault = ((needsSubmit || isSubmitting(behavior))
@@ -1677,6 +1682,7 @@ public class MyRenderKitUtils {
 	 *            case, where we need to render the submit script to make the
 	 *            link submit.
 	 */
+	//!modif
 	private static void renderHandler(FacesContext context, UIComponent component,
 			Collection<ClientBehaviorContext.Parameter> params, String handlerName, Object handlerValue,
 			String behaviorEventName, String submitTarget, boolean needsSubmit, boolean includeExec)
@@ -1698,28 +1704,30 @@ public class MyRenderKitUtils {
 		switch (getHandlerType(behaviors, params, userHandler, needsSubmit, includeExec)) {
 
 		case USER_HANDLER_ONLY:
+			//TODO
 			handler = userHandler;
 			break;
 
 		case SINGLE_BEHAVIOR_ONLY:
 			
-			handler = getSingleBehaviorHandler(context, component, behaviors.get(0), params, behaviorEventName,
-					submitTarget, needsSubmit);
+			setSingleBehaviorHandler(context, component, behaviors.get(0), params, behaviorEventName,
+					submitTarget, needsSubmit, writer);
 			break;
 
 		case SUBMIT_ONLY:
+			//TODO
 			handler = getSubmitHandler(context, component, params, submitTarget, true);
 			break;
 
 		case CHAIN:
+			//TODO
 			handler = getChainedHandler(context, component, behaviors, params, behaviorEventName, userHandler,
 					submitTarget, needsSubmit);
 			break;
 		default:
+			//TODO
 			assert (false);
 		}
-
-		writer.writeAttribute(handlerName, handler, null);
 	}
 
 	// Determines the type of handler to render based on what sorts of

@@ -14,7 +14,7 @@
 	
 	<h:form>
 		<h:panelGroup layout="aside" id="lol">
-			<f:ajax event="click" listener="#{test.test}"/>
+			<f:ajax event="click" listener="#{test.test}" render="lol" onevent="alert('hi')"/>
 			hi
 		</h:panelGroup>
 	</h:form>

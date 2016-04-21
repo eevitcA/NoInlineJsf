@@ -34,30 +34,19 @@ public class MyPanelGroupRenderer extends GroupRenderer {
 		}
 		String styleClass = (String) component.getAttributes().get("styleClass");
 		ResponseWriter writer = context.getResponseWriter();
-//		component.getAttributes().keySet().forEach(k -> System.out.println(k));
-//		HtmlPanelGroup panel = (HtmlPanelGroup) component;
-//		System.out.println(panel.getOnclick());
-//		for (String key : panel.getClientBehaviors().keySet()) {
-//			System.out.println(key + ": " + panel.getClientBehaviors().get(key));
-//			if (key.equals("click")) {
-//				writer.writeAttribute("data-widget", "jsfajax", null);
-//				writer.writeAttribute("data-jsf-event", "click", null);
-//			}
-//		}
+		
+		MyRenderKitUtils.renderPassThruAttributes(context, writer, component, ATTRIBUTES);
+		
+		// styleClass attr has to be written after. For events that aren't click className is used to add event listeners on those elements on js side. 
+		// delegating only click events to the body of document and adding listeners for other events which are used less frequently sounds like a better choice.
 		if (divOrSpan(component)) {
 			// to allow other tags than just div and span (ex: aside, article, etc.).
 			writeTag(component, writer);
 			writeIdAttributeIfNecessary(context, writer, component);
 			if (styleClass != null) {
 				writer.writeAttribute("class", styleClass, "styleClass");
-
 			}
-			// JAVASERVERFACES-3270: do not manually render "style" as it is
-			// handled
-			// in renderPassThruAttributes().
 		}
-
-		MyRenderKitUtils.renderPassThruAttributes(context, writer, component, ATTRIBUTES);
 	}
 
 	@Override
