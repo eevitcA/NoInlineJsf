@@ -80,7 +80,7 @@ public class MyTextRenderer extends TextRenderer {
                                                     getNonOnChangeBehaviors(component));
             RenderKitUtils.renderXHTMLStyleBooleanAttributes(writer, component);
 
-            RenderKitUtils.renderOnchange(context, component, false);
+            MyRenderKitUtils.renderOnchange(context, component, false);
 
 
             writer.endElement("input");

@@ -61,6 +61,8 @@ import com.sun.faces.renderkit.AttributeManager;
 import com.sun.faces.renderkit.RenderKitUtils;
 import com.sun.faces.renderkit.html_basic.HtmlBasicRenderer;
 
+import renderersUtils.MyAttributeManager;
+import renderersUtils.MyClientWidgetRenderer;
 import renderersUtils.MyRenderKitUtils;
 
 /**
@@ -70,8 +72,9 @@ import renderersUtils.MyRenderKitUtils;
 
 public class MyButtonRenderer extends HtmlBasicRenderer {
 
+
     private static final Attribute[] ATTRIBUTES =
-          AttributeManager.getAttributes(AttributeManager.Key.COMMANDBUTTON);
+    	AttributeManager.getAttributes(AttributeManager.Key.COMMANDBUTTON);
 
     // ---------------------------------------------------------- Public Methods
 
@@ -172,6 +175,9 @@ public class MyButtonRenderer extends HtmlBasicRenderer {
           if (styleClass != null && styleClass.length() > 0) {
               writer.writeAttribute("class", styleClass, "styleClass");
           }
+          
+          // Used for helper js function like hide, show, toggleClass etc.
+          MyClientWidgetRenderer.writeCWidget(writer, component);
 
         // PENDING(edburns): Prior to i_spec_1111, this element 
         // was rendered unconditionally

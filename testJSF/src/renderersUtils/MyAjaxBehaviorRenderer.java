@@ -53,6 +53,7 @@ public class MyAjaxBehaviorRenderer extends AjaxBehaviorRenderer {
         String sourceId = behaviorContext.getSourceId();
         String delay = ajaxBehavior.getDelay();
         Boolean resetValues = null;
+        
         if (ajaxBehavior.isResetValuesSet()) {
             resetValues = ajaxBehavior.isResetValues();
         }
