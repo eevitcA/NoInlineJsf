@@ -1,47 +1,80 @@
 "use strict";
 docReady(function(){
 	(function(widgets){
-		document.body.addEventListener("click", function(e) {
-			console.log(e.target);
-			var w = e.target.getAttribute("data-widget");
-			if(w){
-				e.preventDefault();
-				var s = w.split(",");
-				var slength = s.length;
-				for(var i = 0; i <slength; i++){
-					widgets[s[i]](e.target);
-				}
-		
-			}
-		});
-	})(new Widgets);	
+		setClickEvents(widgets);
+		getJsfMobileEvts(widgets);
+	})(new Widgets);
 });
+
+function setClickEvents(widgets){
+	document.body.addEventListener("click", function(e) {
+		var w = e.target.getAttribute("data-widget");
+		if(w){
+			e.preventDefault();
+			var s = w.split(",");
+			var slength = s.length;
+			for(var i = 0; i < slength; i++){
+				widgets[s[i]](e.target, e);
+			}
+		}
+	});
+}
+function getJsfMobileEvts(widgets){
+	var events = ["blur","change","dblclick","focus","keydown","keypress","keyup","mousedown","mousemove","mouseout","mouseover","mouseup","select"];
+	var evLength = events.length;
+	for(var i = 0; i < evLength; i++){
+		var elems = doc.getElementsByClassName('jsf-e-' + events[i]);
+		if(elems.length > 0){
+			addJsfEvtsToMobileEvts(elems, events[i], widgets);
+		}
+	}
+}
+
+function addJsfEvtsToMobileEvts(elems, evt, widgets){
+	log(evt);
+	var eLength = elems.length;
+	for(var i = 0; i < eLength; i++){
+		(function(i){
+			elems[i].addEventListener(evt, function(e){
+				widgets["jsfajax"](elems[i], e, evt);
+			});
+		})(i);
+	}
+}
 
 
 // widgets object 
 function Widgets(){
 	// sends ajax req.
-	this.jsfajax = function jsfajax(elem){
-						if(elem.id == ""){
-							elem.id = elem.name;
-						}
-						var jsfEvent = elem.getAttribute('data-jsf-event');
+	this.jsfajax = function jsfajax(elem, event, jsfEvent){
 						var render = elem.getAttribute('data-render');
 						var execute =  elem.getAttribute('data-execute');
 						var onevent = elem.getAttribute('data-onevent');
+						if(!jsfEvent){
+							jsfEvent = elem.getAttribute('data-jsf-event');
+							if(!jsfEvent){
+								jsfEvent = "click";
+							}
+						}
+						if(elem.id == ""){
+							elem.id = elem.name;
+						}
 						if(render === null){
 							render = 0;
 						}else{
-							var tar = findTarget(elem, render);
-							render = tar.id;
+							if(render.charAt(0) === '#'){
+								var tar = findTarget(elem, render.substring(1));
+								render = tar.id;
+							}
 						}
 						if(execute === null){
 							execute = '@form';
 						}
+						log(jsfEvent);
 						if(onevent === null){
-							mojAb(elem, "click", jsfEvent, execute, render);
+							mojAb(elem, event, jsfEvent, execute, render);
 						}else{
-							mojAb(elem, "click", jsfEvent, execute, render, {'onevent': Miscellaneous[onevent]});
+							mojAb(elem, event, jsfEvent, execute, render, {'onevent': Miscellaneous[onevent]});
 						}
 						
 					};
@@ -61,7 +94,7 @@ function Widgets(){
 					    if (re) {
 					        op["render"] = re;
 					    }
-
+					    log(op);
 					    jsf.ajax.request(s, e, op);
 					};
 	//hides a target elem given by data-hide attribute
@@ -89,7 +122,6 @@ function Widgets(){
 							target = findTarget(elem, target);
 							toggleClass(target, className);
 						};
-	this.editorTools = function EditorTools( elem ) { Editor(elem); }; // uppercase bcz I kinda see it as a static class even though it's not, in fct bcuz defined in other file
 	
 	this.miscellaneous = function Misc( elem ) { 
 							var misc = elem.getAttribute("data-misc");

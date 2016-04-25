@@ -164,7 +164,7 @@ public class MyButtonRenderer extends HtmlBasicRenderer {
             writer.writeAttribute("class", styleClass, "styleClass");
         }
 
-        RenderKitUtils.renderOnclick(context, 
+        MyRenderKitUtils.renderOnclick(context, 
                                      component, 
                                      params,
                                      null,

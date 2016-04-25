@@ -418,7 +418,6 @@ public class MyRenderKitUtils {
 	public static void renderOnclick(FacesContext context, UIComponent component,
 			Collection<ClientBehaviorContext.Parameter> params, String submitTarget, boolean needsSubmit)
 					throws IOException {
-
 		final String handlerName = "onclick";
 		final Object userHandler = component.getAttributes().get(handlerName);
 		String behaviorEventName = "action";
@@ -1703,28 +1702,28 @@ public class MyRenderKitUtils {
 		String handler = null;
 		switch (getHandlerType(behaviors, params, userHandler, needsSubmit, includeExec)) {
 
-		case USER_HANDLER_ONLY:
+		case USER_HANDLER_ONLY:System.out.println(1);
 			//TODO
 			handler = userHandler;
 			break;
 
-		case SINGLE_BEHAVIOR_ONLY:
+		case SINGLE_BEHAVIOR_ONLY:System.out.println(2);
 			
 			setSingleBehaviorHandler(context, component, behaviors.get(0), params, behaviorEventName,
 					submitTarget, needsSubmit, writer);
 			break;
 
-		case SUBMIT_ONLY:
+		case SUBMIT_ONLY:System.out.println(3);
 			//TODO
 			handler = getSubmitHandler(context, component, params, submitTarget, true);
 			break;
 
-		case CHAIN:
+		case CHAIN:System.out.println(4);
 			//TODO
 			handler = getChainedHandler(context, component, behaviors, params, behaviorEventName, userHandler,
 					submitTarget, needsSubmit);
 			break;
-		default:
+		default:System.out.println(5);
 			//TODO
 			assert (false);
 		}

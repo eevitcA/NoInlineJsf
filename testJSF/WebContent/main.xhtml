@@ -13,10 +13,9 @@
 	<h:outputScript name="scripts/template.js"/>
 	
 	<h:form>
-		<h:panelGroup layout="aside" id="lol">
-			<f:ajax event="click" listener="#{test.test}" render="lol" onevent="alert('hi')"/>
-			hi
-		</h:panelGroup>
+		<h:commandButton value="go" action="#{test.test}">
+		<f:ajax />
+		</h:commandButton>
 	</h:form>
 	
 

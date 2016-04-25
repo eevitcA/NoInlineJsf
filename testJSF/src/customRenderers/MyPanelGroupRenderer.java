@@ -32,10 +32,11 @@ public class MyPanelGroupRenderer extends GroupRenderer {
 		if (!shouldEncode(component)) {
 			return;
 		}
-		String styleClass = (String) component.getAttributes().get("styleClass");
+		
 		ResponseWriter writer = context.getResponseWriter();
 		
 		MyRenderKitUtils.renderPassThruAttributes(context, writer, component, ATTRIBUTES);
+		String styleClass = (String) component.getAttributes().get("styleClass");
 		
 		// styleClass attr has to be written after. For events that aren't click className is used to add event listeners on those elements on js side. 
 		// delegating only click events to the body of document and adding listeners for other events which are used less frequently sounds like a better choice.
@@ -78,6 +79,7 @@ public class MyPanelGroupRenderer extends GroupRenderer {
 				if(Arrays.binarySearch(MyHtmlValidTags.TAGS_VALID, layout ) >= 0){
 					writer.startElement(layout, component);
 				}else{
+					//Maybe throwing an error here would be better for compatibility
 					writer.startElement("span", component);
 				}
 			}
