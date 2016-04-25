@@ -14,7 +14,7 @@
 	
 	<h:form>
 		<h:commandButton value="go" action="#{test.test}">
-		<f:ajax />
+		<f:ajax event="mouseover" listener="#{test.test}"/>
 		</h:commandButton>
 	</h:form>
 	

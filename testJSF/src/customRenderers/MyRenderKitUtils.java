@@ -1619,7 +1619,7 @@ public class MyRenderKitUtils {
 			boolean needsSubmit, ResponseWriter writer) throws IOException {
 
 		ClientBehaviorContext bContext = createClientBehaviorContext(context, component, behaviorEventName, params);
-		//TODO : Seems like originally if no renderer was found the script was null, maybe what's under this is not totally correct then.
+		//TODO : Seems like originally if no renderer was found the script was null, maybe what's under this is not totally correct.
 		// see ClientBehaviorBase.getScript()
 		MyAjaxBehaviorRenderer renderer = new MyAjaxBehaviorRenderer();
 		renderer.buildCommands(writer, component, behavior, bContext);
@@ -1702,23 +1702,23 @@ public class MyRenderKitUtils {
 		String handler = null;
 		switch (getHandlerType(behaviors, params, userHandler, needsSubmit, includeExec)) {
 
-		case USER_HANDLER_ONLY:System.out.println(1);
+		case USER_HANDLER_ONLY:
 			//TODO
 			handler = userHandler;
 			break;
 
-		case SINGLE_BEHAVIOR_ONLY:System.out.println(2);
+		case SINGLE_BEHAVIOR_ONLY:
 			
 			setSingleBehaviorHandler(context, component, behaviors.get(0), params, behaviorEventName,
 					submitTarget, needsSubmit, writer);
 			break;
 
-		case SUBMIT_ONLY:System.out.println(3);
+		case SUBMIT_ONLY:
 			//TODO
 			handler = getSubmitHandler(context, component, params, submitTarget, true);
 			break;
 
-		case CHAIN:System.out.println(4);
+		case CHAIN:
 			//TODO
 			handler = getChainedHandler(context, component, behaviors, params, behaviorEventName, userHandler,
 					submitTarget, needsSubmit);

@@ -83,7 +83,7 @@ public class MyAjaxBehaviorRenderer extends AjaxBehaviorRenderer {
         }
         
         // if event is not click, event listener is added on the client by finding the appropriate classNames.
-        if( ! "click".equals(eventName)){
+        if( ! "click".equals(eventName) && ! "action".equals(eventName)){
         	String styleClass = (String) component.getAttributes().get("styleClass");
         	if(null == styleClass)
         		styleClass = "";
@@ -92,6 +92,7 @@ public class MyAjaxBehaviorRenderer extends AjaxBehaviorRenderer {
         	styleClass += "jsf-e-" + eventName;
         	component.getAttributes().put("styleClass", styleClass);
         }else{
+        	writer.writeAttribute("data-jsf-event", eventName, null);
         	writer.writeAttribute("data-widget", "jsfajax", null);
         }
 
