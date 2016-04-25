@@ -13,9 +13,15 @@
 	<h:outputScript name="scripts/template.js"/>
 	
 	<h:form>
-		<h:commandButton value="go" action="#{test.test}">
-		<f:ajax event="mouseover" listener="#{test.test}"/>
-		</h:commandButton>
+		<h:panelGroup id="art" layout="article">
+			<h:inputText>
+				<f:ajax event="change" listener="#{test.test}"/>
+			</h:inputText>
+			
+			<h:commandButton value="go">
+			<f:ajax event="mouseover" listener="#{test.test}" delay="5000" onerror="error" resetValues="art"/>
+			</h:commandButton>
+		</h:panelGroup>
 	</h:form>
 	
 

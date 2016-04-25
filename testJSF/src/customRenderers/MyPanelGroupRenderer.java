@@ -18,6 +18,9 @@ import com.sun.faces.renderkit.AttributeManager;
 import com.sun.faces.renderkit.RenderKitUtils;
 import com.sun.faces.renderkit.html_basic.GroupRenderer;
 
+import renderersUtils.MyHtmlValidTags;
+import renderersUtils.MyRenderKitUtils;
+
 public class MyPanelGroupRenderer extends GroupRenderer {
 
 	private static final Attribute[] ATTRIBUTES = AttributeManager.getAttributes(AttributeManager.Key.PANELGROUP);

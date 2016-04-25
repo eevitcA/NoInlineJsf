@@ -49,15 +49,20 @@ function Widgets(){
 	this.jsfajax = function jsfajax(elem, event, jsfEvent){
 						var render = elem.getAttribute('data-render');
 						var execute =  elem.getAttribute('data-execute');
+						var op = {};
 						var onevent = elem.getAttribute('data-onevent');
+						var onerror = elem.getAttribute('data-onerror');
+						var delay = elem.getAttribute('data-delay');
+
+						if(elem.id == ""){
+							elem.id = elem.name;
+						}
+						
 						if(!jsfEvent){
 							jsfEvent = elem.getAttribute('data-jsf-event');
 							if(!jsfEvent){
 								jsfEvent = "click";
 							}
-						}
-						if(elem.id == ""){
-							elem.id = elem.name;
 						}
 						if(render === null){
 							render = 0;
@@ -70,13 +75,16 @@ function Widgets(){
 						if(execute === null){
 							execute = '@form';
 						}
-						log(jsfEvent);
-						if(onevent === null){
-							mojAb(elem, event, jsfEvent, execute, render);
-						}else{
-							mojAb(elem, event, jsfEvent, execute, render, {'onevent': Miscellaneous[onevent]});
+						if(onevent !== null){
+							op['onevent'] = window[onevent];
 						}
-						
+						if(onerror !== null){
+							op['onerror'] = window[onerror];
+						}
+						if(delay !== null){
+							op['delay'] = delay;
+						}
+						mojAb(elem, event, jsfEvent, execute, render, op);
 					};
 	function mojAb(s, e, n, ex, re, op) {
 					    if (!op) {
@@ -94,7 +102,6 @@ function Widgets(){
 					    if (re) {
 					        op["render"] = re;
 					    }
-					    log(op);
 					    jsf.ajax.request(s, e, op);
 					};
 	//hides a target elem given by data-hide attribute

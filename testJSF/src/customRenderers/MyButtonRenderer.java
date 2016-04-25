@@ -61,6 +61,8 @@ import com.sun.faces.renderkit.AttributeManager;
 import com.sun.faces.renderkit.RenderKitUtils;
 import com.sun.faces.renderkit.html_basic.HtmlBasicRenderer;
 
+import renderersUtils.MyRenderKitUtils;
+
 /**
  * <B>ButtonRenderer</B> is a class that renders the current value of
  * <code>UICommand<code> as a Button.
@@ -150,7 +152,7 @@ public class MyButtonRenderer extends HtmlBasicRenderer {
             writer.writeAttribute("value", label, "value");
         }
 
-        RenderKitUtils.renderPassThruAttributes(context,
+        MyRenderKitUtils.renderPassThruAttributes(context,
                                                 writer,
                                                 component,
                                                 ATTRIBUTES,

@@ -11,10 +11,17 @@
         <renderer-type>javax.faces.Group</renderer-type>
         <renderer-class>customRenderers.MyPanelGroupRenderer</renderer-class>
     </renderer>
+    
     <renderer>
         <component-family>javax.faces.Command</component-family>
         <renderer-type>javax.faces.Button</renderer-type>
         <renderer-class>customRenderers.MyButtonRenderer</renderer-class>
+    </renderer>
+    
+    <renderer>
+        <component-family>javax.faces.Input</component-family>
+        <renderer-type>javax.faces.Text</renderer-type>
+        <renderer-class>customRenderers.MyTextRenderer</renderer-class>
     </renderer>
 </render-kit>   
 </faces-config>
