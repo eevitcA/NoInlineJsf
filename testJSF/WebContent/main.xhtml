@@ -18,12 +18,15 @@
 				<f:ajax event="change" listener="#{test.test}"/>
 			</h:inputText>
 			
-			<h:commandButton type="button" value="go" data-c-widget="shower" data-show="cc">
-				<f:ajax event="click" render="cc"/>
-			</h:commandButton>
+			<h:panelGroup data-c-widget="shower" data-show="#sibling,next cc2">
+				hh
+			</h:panelGroup>
 			
-			<h:panelGroup id="cc" style="display:none;">
-				kk
+			<h:panelGroup id="cc1" style="display:none;">
+				ll
+			</h:panelGroup>
+			<h:panelGroup id="cc2" style="display:none;">
+				ll
 			</h:panelGroup>
 		</h:panelGroup>
 	</h:form>

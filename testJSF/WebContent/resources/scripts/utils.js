@@ -100,13 +100,34 @@ function toggleClass(e, cls){
     }
     e.className = classString;
 }
+function findTargetsId(e, trs){
+	var trs = trs.split(" ");
+	var tlength = trs.length;
+	for(var i = 0; i < tlength; i++){
+		var tar = findTarget(e, trs[i]);
+		trs[i] = tar.id;
+	}
+	return trs.join(" ");
+}
+function findTargets(e, trs){
+	var trs = trs.split(" ");
+	var tlength = trs.length;
+	for(var i = 0; i < tlength; i++){
+		trs[i] = findTarget(e, trs[i]);
+	}
+	return trs;
+}
 
 function findTarget(e, tr){
-	var target = tr.split(',');
-	switch(target[0]){
-		case 'this': return e;
-		case 'sibling': return findSibling(e, target[1]);
-		default : return doc.getElementById(target[0]);
+	if(tr.charAt(0) === '#'){
+		var target = tr.split(',');
+		switch(target[0]){
+			case '#this': return e;
+			case '#sibling': return findSibling(e, target[1]);
+			case '#id' : return doc.getElementById(target[1]); 
+		}
+	}else{
+		return doc.getElementById(tr);
 	}
 }
 

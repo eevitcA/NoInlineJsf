@@ -18,6 +18,7 @@ import com.sun.faces.renderkit.AttributeManager;
 import com.sun.faces.renderkit.RenderKitUtils;
 import com.sun.faces.renderkit.html_basic.GroupRenderer;
 
+import renderersUtils.MyClientWidgetRenderer;
 import renderersUtils.MyHtmlValidTags;
 import renderersUtils.MyRenderKitUtils;
 
@@ -39,6 +40,7 @@ public class MyPanelGroupRenderer extends GroupRenderer {
 		ResponseWriter writer = context.getResponseWriter();
 		
 		MyRenderKitUtils.renderPassThruAttributes(context, writer, component, ATTRIBUTES);
+		
 		String styleClass = (String) component.getAttributes().get("styleClass");
 		
 		// styleClass attr has to be written after. For events that aren't click className is used to add event listeners on those elements on js side. 
@@ -51,6 +53,8 @@ public class MyPanelGroupRenderer extends GroupRenderer {
 				writer.writeAttribute("class", styleClass, "styleClass");
 			}
 		}
+		
+		MyClientWidgetRenderer.writeCWidget(writer, component);
 	}
 
 	@Override

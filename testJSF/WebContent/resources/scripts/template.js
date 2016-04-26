@@ -8,8 +8,8 @@ docReady(function(){
 
 function setClickEvents(widgets){
 	document.body.addEventListener("click", function(e) {
-		var w = e.target.getAttribute("data-jsfajax");
-		if(w){
+		var w;
+		if(e.target.hasAttribute("data-jsfajax")){
 			e.preventDefault();
 			widgets["jsfajax"](e.target, e);
 		}
@@ -71,10 +71,7 @@ function Widgets(){
 						if(render === null){
 							render = 0;
 						}else{
-							if(render.charAt(0) === '#'){
-								var tar = findTarget(elem, render.substring(1));
-								render = tar.id;
-							}
+							render = findTargetsId(elem, render);
 						}
 						if(execute === null){
 							execute = '@form';
@@ -110,28 +107,40 @@ function Widgets(){
 					};
 	//hides a target elem given by data-hide attribute
 	this.hider = function hider(elem){
-					var target = elem.getAttribute('data-hide');
-					target = findTarget(elem, target);
-					hideElem(target);
+					var targets = elem.getAttribute('data-hide');
+					targets = findTargets(elem, targets);
+					var tlength = targets.length;
+					for(var i = 0; i < tlength; i++){
+						hideElem(targets[i]);	
+					}
 				 };
 	// makes target div visible , target given by data-show attr
 	this.shower = function shower(elem){
-					var target = elem.getAttribute('data-show');
-					target = findTarget(elem, target);
-					showElem(target);
+					var targets = elem.getAttribute('data-show');
+					targets = findTargets(elem, targets);
+					var tlength = targets.length;
+					for(var i = 0; i < tlength; i++){
+						showElem(targets[i]);	
+					}
 				  }
 	// focus on target field , target given by data-focus attr
 	this.focuser = function focuser(elem){
-					var target = elem.getAttribute('data-focus');
-					target = findTarget(elem, target);
-					target.focus();
+					var targets = elem.getAttribute('data-focus');
+					targets = findTargets(elem, targets);
+					var tlength = targets.length;
+					for(var i = 0; i < tlength; i++){
+						target.focus();	
+					}
 				  };
 	// toggles class on target elem , target given by data-tg-target attr
 	this.classToggler = function classToggler(elem){
 							var className = elem.getAttribute('data-toggleClass');
-							var target = elem.getAttribute('data-tg-target');
-							target = findTarget(elem, target);
-							toggleClass(target, className);
+							var targets = elem.getAttribute('data-tg-target');
+							targets = findTargets(elem, targets);
+							var tlength = targets.length;
+							for(var i = 0; i < tlength; i++){
+								toggleClass(targets[i], className);	
+							}
 						};
 	
 	this.miscellaneous = function Misc( elem ) { 
