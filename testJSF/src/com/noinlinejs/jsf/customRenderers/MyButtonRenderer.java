@@ -1,4 +1,4 @@
-package customRenderers;
+package com.noinlinejs.jsf.customRenderers;
 
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
@@ -56,14 +56,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.event.ActionEvent;
 
+import com.noinlinejs.jsf.renderersUtils.MyAttributeManager;
+import com.noinlinejs.jsf.renderersUtils.MyClientWidgetRenderer;
+import com.noinlinejs.jsf.renderersUtils.MyRenderKitUtils;
 import com.sun.faces.renderkit.Attribute;
 import com.sun.faces.renderkit.AttributeManager;
 import com.sun.faces.renderkit.RenderKitUtils;
 import com.sun.faces.renderkit.html_basic.HtmlBasicRenderer;
-
-import renderersUtils.MyAttributeManager;
-import renderersUtils.MyClientWidgetRenderer;
-import renderersUtils.MyRenderKitUtils;
 
 /**
  * <B>ButtonRenderer</B> is a class that renders the current value of

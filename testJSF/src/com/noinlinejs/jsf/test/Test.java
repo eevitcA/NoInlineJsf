@@ -1,4 +1,4 @@
-package test;
+package com.noinlinejs.jsf.test;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;

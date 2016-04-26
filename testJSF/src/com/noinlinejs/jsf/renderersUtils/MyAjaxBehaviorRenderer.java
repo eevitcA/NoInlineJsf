@@ -1,4 +1,4 @@
-package renderersUtils;
+package com.noinlinejs.jsf.renderersUtils;
 
 import java.io.IOException;
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package customRenderers;
+package com.noinlinejs.jsf.customRenderers;
 
 import java.io.IOException;
 import java.util.Map;
@@ -10,13 +10,12 @@ import javax.faces.component.html.HtmlInputFile;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
+import com.noinlinejs.jsf.renderersUtils.MyClientWidgetRenderer;
+import com.noinlinejs.jsf.renderersUtils.MyRenderKitUtils;
 import com.sun.faces.renderkit.Attribute;
 import com.sun.faces.renderkit.AttributeManager;
 import com.sun.faces.renderkit.RenderKitUtils;
 import com.sun.faces.renderkit.html_basic.TextRenderer;
-
-import renderersUtils.MyClientWidgetRenderer;
-import renderersUtils.MyRenderKitUtils;
 
 public class MyTextRenderer extends TextRenderer {
 	

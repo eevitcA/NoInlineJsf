@@ -1,4 +1,4 @@
-package renderersUtils;
+package com.noinlinejs.jsf.renderersUtils;
 
 import java.util.Collections;
 import java.util.HashMap;

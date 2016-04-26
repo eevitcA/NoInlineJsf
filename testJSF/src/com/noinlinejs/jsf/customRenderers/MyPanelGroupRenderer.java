@@ -1,4 +1,4 @@
-package customRenderers;
+package com.noinlinejs.jsf.customRenderers;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -13,14 +13,13 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 import javax.faces.render.Renderer;
 
+import com.noinlinejs.jsf.renderersUtils.MyClientWidgetRenderer;
+import com.noinlinejs.jsf.renderersUtils.MyHtmlValidTags;
+import com.noinlinejs.jsf.renderersUtils.MyRenderKitUtils;
 import com.sun.faces.renderkit.Attribute;
 import com.sun.faces.renderkit.AttributeManager;
 import com.sun.faces.renderkit.RenderKitUtils;
 import com.sun.faces.renderkit.html_basic.GroupRenderer;
-
-import renderersUtils.MyClientWidgetRenderer;
-import renderersUtils.MyHtmlValidTags;
-import renderersUtils.MyRenderKitUtils;
 
 public class MyPanelGroupRenderer extends GroupRenderer {
 
