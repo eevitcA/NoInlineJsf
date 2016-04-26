@@ -99,7 +99,7 @@ public class MyTextRenderer extends TextRenderer {
                     writer.writeAttribute("class", styleClass, "styleClass");
                 }
                 // style is rendered as a passthru attribute
-                RenderKitUtils.renderPassThruAttributes(context,
+                MyRenderKitUtils.renderPassThruAttributes(context,
                                                         writer,
                                                         component,
                                                         OUTPUT_ATTRIBUTES);
