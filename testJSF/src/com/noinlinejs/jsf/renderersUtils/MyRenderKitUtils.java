@@ -1702,28 +1702,28 @@ public class MyRenderKitUtils {
 		String handler = null;
 		switch (getHandlerType(behaviors, params, userHandler, needsSubmit, includeExec)) {
 
-		case USER_HANDLER_ONLY: System.out.println(1);
+		case USER_HANDLER_ONLY: //System.out.println(1);
 			//TODO
-			handler = userHandler; System.out.println(handler);
+			handler = userHandler; //System.out.println(handler);
 			break;
 
-		case SINGLE_BEHAVIOR_ONLY: System.out.println(2);
+		case SINGLE_BEHAVIOR_ONLY: //System.out.println(2);
 			
 			setSingleBehaviorHandler(context, component, behaviors.get(0), params, behaviorEventName,
 					submitTarget, needsSubmit, writer);
 			break;
 
-		case SUBMIT_ONLY: System.out.println(3);
+		case SUBMIT_ONLY: //System.out.println(3);
 			//TODO
 			handler = getSubmitHandler(context, component, params, submitTarget, true);
 			break;
 
-		case CHAIN: System.out.println(4);
+		case CHAIN: //System.out.println(4);
 			//TODO
 			handler = getChainedHandler(context, component, behaviors, params, behaviorEventName, userHandler,
 					submitTarget, needsSubmit);
 			break;
-		default:System.out.println(5);
+		default://System.out.println(5);
 			//TODO
 			assert (false);
 		}

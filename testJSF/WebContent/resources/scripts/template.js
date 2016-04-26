@@ -1,12 +1,13 @@
 "use strict";
+var noinlinejs = {};
 docReady(function(){
 	(function(widgets){
-		setClickEvents(widgets);
-		getJsfMobileEvts(widgets);
+		noinlinejs.setClickEvents(widgets);
+		noinlinejs.getJsfMobileEvts(widgets);
 	})(new Widgets);
 });
 
-function setClickEvents(widgets){
+noinlinejs.setClickEvents = function setClickEvents(widgets){
 	document.body.addEventListener("click", function(e) {
 		var w;
 		if(e.target.hasAttribute("data-jsfajax")){
@@ -23,7 +24,7 @@ function setClickEvents(widgets){
 		}
 	});
 }
-function getJsfMobileEvts(widgets){
+noinlinejs.getJsfMobileEvts = function getJsfMobileEvts(widgets){
 	var events = ["blur","change","dblclick","focus","keydown","keypress","keyup","mousedown","mousemove","mouseout","mouseover","mouseup","select"];
 	var evLength = events.length;
 	for(var i = 0; i < evLength; i++){
@@ -34,7 +35,7 @@ function getJsfMobileEvts(widgets){
 	}
 }
 
-function addJsfEvtsToMobileEvts(elems, evt, widgets){
+noinlinejs.addJsfEvtsToMobileEvts = function addJsfEvtsToMobileEvts(elems, evt, widgets){
 	log(evt);
 	var eLength = elems.length;
 	for(var i = 0; i < eLength; i++){
