@@ -94,7 +94,7 @@ public class MyAjaxBehaviorRenderer extends AjaxBehaviorRenderer {
         	component.getAttributes().put("styleClass", styleClass);
         }else{
         	writer.writeAttribute("data-jsf-event", eventName, null);
-        	writer.writeAttribute("data-widget", "jsfajax", null);
+        	writer.writeAttribute("data-jsfajax", "", null);
         }
 
         appendIds(component, writer, execute, "execute");
@@ -169,11 +169,6 @@ public class MyAjaxBehaviorRenderer extends AjaxBehaviorRenderer {
                 first = false;
             }
             
-            // the # char is used in the js as an helper, for example for finding siblings in a tree like structure.
-            if(id.charAt(0) == '#'){
-            	strIds += id;
-            	continue;
-            }
 
             if (id.equals("@all") || id.equals("@none") ||
                 id.equals("@form") || id.equals("@this")) {
@@ -188,7 +183,11 @@ public class MyAjaxBehaviorRenderer extends AjaxBehaviorRenderer {
     
     // Returns the resolved (client id) for a particular id.
     private static String getResolvedId(UIComponent component, String id) {
-
+    	// the # char is used in the js as an helper, for example for finding siblings in a tree like structure.
+        if(id.charAt(0) == '#'){
+        	return id;
+        }
+    	
         UIComponent resolvedComponent = component.findComponent(id);
         if (resolvedComponent == null) {
             if (id.charAt(0) == UINamingContainer.getSeparatorChar(FacesContext.getCurrentInstance())) {

@@ -8,9 +8,13 @@ docReady(function(){
 
 function setClickEvents(widgets){
 	document.body.addEventListener("click", function(e) {
-		var w = e.target.getAttribute("data-widget");
+		var w = e.target.getAttribute("data-jsfajax");
 		if(w){
 			e.preventDefault();
+			widgets["jsfajax"](e.target, e);
+		}
+		 w = e.target.getAttribute("data-c-widget");
+		if(w){
 			var s = w.split(",");
 			var slength = s.length;
 			for(var i = 0; i < slength; i++){

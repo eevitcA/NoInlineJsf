@@ -18,9 +18,13 @@
 				<f:ajax event="change" listener="#{test.test}"/>
 			</h:inputText>
 			
-			<h:commandButton value="go" data-c-widget="shower" data-show="cc">
-				<f:ajax event="mouseover" listener="#{test.test}" delay="5000" onerror="error" />
+			<h:commandButton type="button" value="go" data-c-widget="shower" data-show="cc">
+				<f:ajax event="click" render="cc"/>
 			</h:commandButton>
+			
+			<h:panelGroup id="cc" style="display:none;">
+				kk
+			</h:panelGroup>
 		</h:panelGroup>
 	</h:form>
 	

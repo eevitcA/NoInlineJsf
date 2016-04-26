@@ -1,5 +1,5 @@
-let doc = document;
-let growl = doc.getElementById('growl');
+var doc = document;
+var growl = doc.getElementById('growl');
 
 (function(funcName, baseObj) {
     "use strict";
@@ -19,7 +19,7 @@ let growl = doc.getElementById('growl');
         if (!readyFired) {
             // this must be set to true before we start calling callbacks
             readyFired = true;
-            for (let i = 0; i < readyList.length; i++) {
+            for (var i = 0; i < readyList.length; i++) {
                 // if a callback here happens to add new ready handlers,
                 // the docReady() function will see that it already fired
                 // and will schedule the callback to run right after
@@ -73,19 +73,6 @@ let growl = doc.getElementById('growl');
         }
     }
 })("docReady", window);
-// modify this previous line to pass in your own method name 
-// and object for the method to be attached to
-
-function createWidget(className, baseObj){
-	let es = doc.getElementsByClassName(className);
-	let length = es.length;
-	let b;
-	for(let i = 0; i < length; i++){
-		b = new baseObj(es[i]);
-	}
-}
-
-
 
 function show(id){
 	doc.getElementById(id).style.display = "block";
@@ -118,8 +105,8 @@ function findTarget(e, tr){
 	var target = tr.split(',');
 	switch(target[0]){
 		case 'this': return e;
-		case 'id': return doc.getElementById(target[1]);
 		case 'sibling': return findSibling(e, target[1]);
+		default : return doc.getElementById(target[0]);
 	}
 }
 
