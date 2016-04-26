@@ -1,0 +1,18 @@
+{
+  "name": "noinlinejs",
+  "version": "0.0.1",
+  "description": "This is a project that aims to remove inline javascript from JSF framework",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "/eevitcA/NoInlineJsf"
+  },
+  "author": "Cedric Vanden Bosch",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}

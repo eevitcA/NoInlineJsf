@@ -23,12 +23,12 @@ public class MyClientWidgetRenderer {
 			.add("classToggler", new CAttribute[]{new CAttribute("data-tg-target", false), new CAttribute("data-toggleClass", false)});
 	private static final String ERROR_VALID_ATTRS = ". Valid attributes are: shower, hider, focuser, classToggler.";
 
-	public static boolean writeCWidget(ResponseWriter writer, UIComponent component) throws IOException{
+	public static void writeCWidget(ResponseWriter writer, UIComponent component) throws IOException{
 		//No ajax
 		String cWidget = (String) component.getAttributes().get("data-c-widget");
 		
 		if(null == cWidget){
-			return false;
+			return;
 		}
 		// example: data-c-widget="shower,classToggler"
 		String[] widArr = cWidget.split(" ");
@@ -49,7 +49,6 @@ public class MyClientWidgetRenderer {
 			}
 		}
 		writer.writeAttribute("data-c-widget", cWidget, null);
-		return true;
 	}
 	
 	private static String resolveIds(UIComponent component, String ids){

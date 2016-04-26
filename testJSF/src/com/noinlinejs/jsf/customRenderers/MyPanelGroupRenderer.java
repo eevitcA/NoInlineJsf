@@ -39,7 +39,7 @@ public class MyPanelGroupRenderer extends GroupRenderer {
 		
 		ResponseWriter writer = context.getResponseWriter();
 
-		if (divOrSpan(component) || MyClientWidgetRenderer.writeCWidget(writer, component)) {
+		if (divOrSpan(component) || null != component.getAttributes().get("data-c-widget")) {
 			// to allow other tags than just div and span (ex: aside, article, etc.).
 			layout = writeTag(component);
 			writer.startElement(layout, component);
@@ -53,6 +53,7 @@ public class MyPanelGroupRenderer extends GroupRenderer {
 		if (styleClass != null) {
 			writer.writeAttribute("class", styleClass, "styleClass");
 		}
+		MyClientWidgetRenderer.writeCWidget(writer, component);
 	}
 
 	@Override
@@ -63,7 +64,7 @@ public class MyPanelGroupRenderer extends GroupRenderer {
 			return;
 		}
 		ResponseWriter writer = context.getResponseWriter();
-		if (divOrSpan(component)) {
+		if (divOrSpan(component) || null != component.getAttributes().get("data-c-widget")) {
 			writer.endElement(layout);
 		}
 	}
