@@ -25,6 +25,7 @@ import renderersUtils.MyRenderKitUtils;
 public class MyPanelGroupRenderer extends GroupRenderer {
 
 	private static final Attribute[] ATTRIBUTES = AttributeManager.getAttributes(AttributeManager.Key.PANELGROUP);
+	private String layout;
 
 	public MyPanelGroupRenderer() {
 	}
@@ -38,23 +39,21 @@ public class MyPanelGroupRenderer extends GroupRenderer {
 		}
 		
 		ResponseWriter writer = context.getResponseWriter();
-		
-		MyRenderKitUtils.renderPassThruAttributes(context, writer, component, ATTRIBUTES);
-		
-		String styleClass = (String) component.getAttributes().get("styleClass");
-		
-		// styleClass attr has to be written after. For events that aren't click className is used to add event listeners on those elements on js side. 
-		// delegating only click events to the body of document and adding listeners for other events which are used less frequently sounds like a better choice.
-		if (divOrSpan(component)) {
+
+		if (divOrSpan(component) || MyClientWidgetRenderer.writeCWidget(writer, component)) {
 			// to allow other tags than just div and span (ex: aside, article, etc.).
-			writeTag(component, writer);
+			layout = writeTag(component);
+			writer.startElement(layout, component);
 			writeIdAttributeIfNecessary(context, writer, component);
-			if (styleClass != null) {
-				writer.writeAttribute("class", styleClass, "styleClass");
-			}
 		}
 		
-		MyClientWidgetRenderer.writeCWidget(writer, component);
+		MyRenderKitUtils.renderPassThruAttributes(context, writer, component, ATTRIBUTES);
+		// styleClass attr has to be written after. For events that aren't click className is used to add event listeners on those elements on js side. 
+		// delegating only click events to the body of document and adding listeners for other events which are used less frequently sounds like a better choice.
+		String styleClass = (String) component.getAttributes().get("styleClass");
+		if (styleClass != null) {
+			writer.writeAttribute("class", styleClass, "styleClass");
+		}
 	}
 
 	@Override
@@ -66,28 +65,24 @@ public class MyPanelGroupRenderer extends GroupRenderer {
 		}
 		ResponseWriter writer = context.getResponseWriter();
 		if (divOrSpan(component)) {
-			if ("block".equals(component.getAttributes().get("layout"))) {
-				writer.endElement("div");
-			} else {
-				writer.endElement("span");
-			}
+			writer.endElement(layout);
 		}
 	}
 
-	private void writeTag(UIComponent component, ResponseWriter writer) throws IOException {
+	private String writeTag(UIComponent component) throws IOException {
 		String layout = (String) component.getAttributes().get("layout");
 		if(null == layout){
-			writer.startElement("span", component);
+			return "span";
 		}else{
 			if( "block".equals(layout) ){
-				writer.startElement("div", component);
+				return "div";
 			}else{
 				// Dunno if this should be done. Seems a bit safer.
 				if(Arrays.binarySearch(MyHtmlValidTags.TAGS_VALID, layout ) >= 0){
-					writer.startElement(layout, component);
+					return layout;
 				}else{
 					//Maybe throwing an error here would be better for compatibility
-					writer.startElement("span", component);
+					return "span";
 				}
 			}
 		}
