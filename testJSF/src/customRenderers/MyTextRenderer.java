@@ -15,6 +15,7 @@ import com.sun.faces.renderkit.AttributeManager;
 import com.sun.faces.renderkit.RenderKitUtils;
 import com.sun.faces.renderkit.html_basic.TextRenderer;
 
+import renderersUtils.MyClientWidgetRenderer;
 import renderersUtils.MyRenderKitUtils;
 
 public class MyTextRenderer extends TextRenderer {
@@ -68,9 +69,7 @@ public class MyTextRenderer extends TextRenderer {
             if (currentValue != null) {
                 writer.writeAttribute("value", currentValue, "value");
             }
-            if (null != styleClass) {
-                writer.writeAttribute("class", styleClass, "styleClass");
-            }
+
 
             // style is rendered as a passthur attribute
             MyRenderKitUtils.renderPassThruAttributes(context,
@@ -81,8 +80,12 @@ public class MyTextRenderer extends TextRenderer {
             RenderKitUtils.renderXHTMLStyleBooleanAttributes(writer, component);
 
             MyRenderKitUtils.renderOnchange(context, component, false);
-
-
+            // styleClass might have changed at this point
+            styleClass = (String) component.getAttributes().get("styleClass");
+            if (null != styleClass) {
+                writer.writeAttribute("class", styleClass, "styleClass");
+            }
+            MyClientWidgetRenderer.writeCWidget(writer, component);
             writer.endElement("input");
 
         } else if (isOutput = (component instanceof UIOutput)) {
@@ -99,7 +102,7 @@ public class MyTextRenderer extends TextRenderer {
                     writer.writeAttribute("class", styleClass, "styleClass");
                 }
                 // style is rendered as a passthru attribute
-                MyRenderKitUtils.renderPassThruAttributes(context,
+                RenderKitUtils.renderPassThruAttributes(context,
                                                         writer,
                                                         component,
                                                         OUTPUT_ATTRIBUTES);

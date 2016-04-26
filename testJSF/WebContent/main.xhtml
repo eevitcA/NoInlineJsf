@@ -14,13 +14,13 @@
 	
 	<h:form>
 		<h:panelGroup id="art" layout="article">
-			<h:inputText>
-				<f:ajax event="change" listener="#{test.test}"/>
-			</h:inputText>
-			
-			<h:panelGroup data-c-widget="shower" data-show="#sibling,next cc2">
-				hh
-			</h:panelGroup>
+		
+			<h:selectOneRadio styleClass="blbl">
+
+				<f:ajax listener="#{test.test}"/>
+			   <f:selectItem itemValue="1" itemLabel="Item 1" />
+  				<f:selectItem itemValue="2" itemLabel="Item 2" />
+			</h:selectOneRadio>
 			
 			<h:panelGroup id="cc1" style="display:none;">
 				ll
