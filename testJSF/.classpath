@@ -23,6 +23,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/Ced/Downloads/javax.faces-2.2.12.jar" sourcepath="C:/Users/Ced/Downloads/javax.faces-2.2.12-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Ced/Documents/noinlinejs.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
