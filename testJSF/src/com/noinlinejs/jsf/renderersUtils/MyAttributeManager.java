@@ -1,5 +1,10 @@
 package com.noinlinejs.jsf.renderersUtils;
 
+import static com.sun.faces.renderkit.Attribute.attr;
+import static com.sun.faces.util.CollectionsUtils.ar;
+
+import java.util.Map;
+
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  * 
@@ -42,9 +47,6 @@ package com.noinlinejs.jsf.renderersUtils;
 
 import com.sun.faces.renderkit.Attribute;
 import com.sun.faces.util.CollectionsUtils;
-import java.util.Map;
-import static com.sun.faces.renderkit.Attribute.*;
-import static com.sun.faces.util.CollectionsUtils.*;
 
 /**
  * This class contains mappings between the standard components

@@ -1,10 +1,5 @@
 package com.noinlinejs.jsf.renderersUtils;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-
 public class MyHtmlValidTags {
 
 	public static final String[] TAGS_VALID = { "abbr", "address", "area", "article", "aside", "audio", "b",

@@ -8,7 +8,6 @@ import javax.faces.component.UINamingContainer;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.sun.faces.renderkit.Attribute;
 import com.sun.faces.util.CollectionsUtils;
 
 //This is just an helper class to speed up js development by allowing hide, show, focus and toggle class with attributes

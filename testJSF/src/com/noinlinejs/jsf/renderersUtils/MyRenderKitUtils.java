@@ -1,22 +1,6 @@
 package com.noinlinejs.jsf.renderersUtils;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIComponentBase;
-import javax.faces.component.behavior.ClientBehavior;
-import javax.faces.component.behavior.ClientBehaviorContext;
-import javax.faces.component.behavior.ClientBehaviorHolder;
-import javax.faces.context.FacesContext;
-import javax.faces.context.ResponseWriter;
-
-import com.sun.faces.renderkit.Attribute;
-import com.sun.faces.renderkit.RenderKitUtils;
-import com.sun.faces.util.Util;
 
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
@@ -59,35 +43,52 @@ import com.sun.faces.util.Util;
  */
 
 import java.io.Writer;
-import java.util.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.math.BigDecimal;
 
 import javax.faces.FacesException;
 import javax.faces.FactoryFinder;
-import javax.faces.application.Resource;
-import javax.faces.application.ResourceHandler;
-import javax.faces.application.ProjectStage;
 import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
-import javax.faces.component.behavior.*;
+import javax.faces.application.ProjectStage;
+import javax.faces.application.Resource;
+import javax.faces.application.ResourceHandler;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIComponentBase;
+import javax.faces.component.UIForm;
+import javax.faces.component.UIViewRoot;
+import javax.faces.component.behavior.ClientBehavior;
+import javax.faces.component.behavior.ClientBehaviorContext;
+import javax.faces.component.behavior.ClientBehaviorHint;
+import javax.faces.component.behavior.ClientBehaviorHolder;
+import javax.faces.component.html.HtmlMessages;
 import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
 import javax.faces.model.SelectItem;
 import javax.faces.render.RenderKit;
 import javax.faces.render.RenderKitFactory;
-import javax.faces.render.ResponseStateManager;
 import javax.faces.render.Renderer;
-import com.sun.faces.renderkit.SelectItemsIterator;
+import javax.faces.render.ResponseStateManager;
 
 import com.sun.faces.RIConstants;
 import com.sun.faces.config.WebConfiguration;
 import com.sun.faces.facelets.util.DevTools;
+import com.sun.faces.renderkit.Attribute;
+import com.sun.faces.renderkit.SelectItemsIterator;
 import com.sun.faces.util.FacesLogger;
 import com.sun.faces.util.RequestStateManager;
-
-import javax.faces.component.*;
-import javax.faces.component.html.HtmlMessages;
+import com.sun.faces.util.Util;
 
 /**
  * <p>

@@ -50,13 +50,12 @@ import java.util.logging.Level;
 
 import javax.faces.component.UICommand;
 import javax.faces.component.UIComponent;
-import javax.faces.component.behavior.ClientBehaviorContext;
 import javax.faces.component.behavior.ClientBehavior;
+import javax.faces.component.behavior.ClientBehaviorContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.event.ActionEvent;
 
-import com.noinlinejs.jsf.renderersUtils.MyAttributeManager;
 import com.noinlinejs.jsf.renderersUtils.MyClientWidgetRenderer;
 import com.noinlinejs.jsf.renderersUtils.MyRenderKitUtils;
 import com.sun.faces.renderkit.Attribute;

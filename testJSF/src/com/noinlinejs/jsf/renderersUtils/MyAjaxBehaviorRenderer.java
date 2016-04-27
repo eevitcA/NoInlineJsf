@@ -15,7 +15,6 @@ import javax.faces.component.behavior.ClientBehaviorContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.sun.faces.renderkit.RenderKitUtils;
 import com.sun.faces.renderkit.html_basic.AjaxBehaviorRenderer;
 
 public class MyAjaxBehaviorRenderer extends AjaxBehaviorRenderer {
