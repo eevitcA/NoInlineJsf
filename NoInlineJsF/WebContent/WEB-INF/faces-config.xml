@@ -4,5 +4,45 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
     version="2.2">
-
+<!-- this has to be added to faces-config.xhtml  -->
+    <render-kit>
+    	<!-- PanelGroup -->
+	    <renderer>
+	        <component-family>javax.faces.Panel</component-family>
+	        <renderer-type>javax.faces.Group</renderer-type>
+	        <renderer-class>com.noinlinejs.jsf.customRenderers.MyPanelGroupRenderer</renderer-class>
+	    </renderer>
+	    <!-- CommandButon -->
+	    <renderer>
+	        <component-family>javax.faces.Command</component-family>
+	        <renderer-type>javax.faces.Button</renderer-type>
+	        <renderer-class>com.noinlinejs.jsf.customRenderers.MyButtonRenderer</renderer-class>
+	    </renderer>
+	    <!-- Inputs -->
+	    <renderer>
+	        <component-family>javax.faces.Input</component-family>
+	        <renderer-type>javax.faces.Text</renderer-type>
+	        <renderer-class>com.noinlinejs.jsf.customRenderers.MyTextRenderer</renderer-class>
+	    </renderer>
+	    
+	    <!-- Those commented are not yet done -->
+	    <!-- SelectBooleanCheckbox -->
+<!-- 	    <renderer>
+	        <component-family>javax.faces.SelectBoolean</component-family>
+	        <renderer-type>javax.faces.Checkbox</renderer-type>
+	        <renderer-class>com.noinlinejs.jsf.customRenderers.MyCheckBoxRenderer</renderer-class>
+	    </renderer> -->
+	    <!-- SelectManyCheckbox -->
+<!--  	    <renderer>
+	        <component-family>javax.faces.SelectMany</component-family>
+	        <renderer-type>javax.faces.Checkbox</renderer-type>
+	        <renderer-class>com.noinlinejs.jsf.customRenderers.MyListBoxRenderer</renderer-class>
+	    </renderer>  -->
+	    <!-- SelectOneRadio -->
+<!--  	    <renderer>
+	        <component-family>javax.faces.SelectOne</component-family>
+	        <renderer-type>javax.faces.Radio</renderer-type>
+	        <renderer-class>com.noinlinejs.jsf.customRenderers.MyRadioRenderer</renderer-class>
+	    </renderer>  -->
+	</render-kit>   
 </faces-config>
