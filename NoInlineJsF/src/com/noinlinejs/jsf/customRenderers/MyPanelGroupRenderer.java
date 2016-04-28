@@ -43,10 +43,11 @@ public class MyPanelGroupRenderer extends GroupRenderer {
 		// styleClass attr has to be written after. For events that aren't click className is used to add event listeners on those elements on js side. 
 		// delegating only click events to the body of document and adding listeners for other events which are used less frequently sounds like a better choice.
 		String styleClass = (String) component.getAttributes().get("styleClass");
-		if (styleClass != null) {
+		styleClass = MyClientWidgetRenderer.writeCWidget(writer, component, styleClass);
+
+		if (styleClass != null ) {
 			writer.writeAttribute("class", styleClass, "styleClass");
 		}
-		MyClientWidgetRenderer.writeCWidget(writer, component);
 	}
 
 	@Override

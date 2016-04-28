@@ -42,12 +42,12 @@ public class MyTextareaRenderer extends TextareaRenderer {
           
           String styleClass =
                   (String) component.getAttributes().get("styleClass");
-
+          
+          styleClass = MyClientWidgetRenderer.writeCWidget(writer, component, styleClass);
+          
           if (null != styleClass) {
               writer.writeAttribute("class", styleClass, "styleClass");
           }
-          
-          MyClientWidgetRenderer.writeCWidget(writer, component);
 
           if (component.getAttributes().containsKey("com.sun.faces.addNewLineAtStart") &&
                   "true".equalsIgnoreCase((String) component.getAttributes().get("com.sun.faces.addNewLineAtStart"))) {

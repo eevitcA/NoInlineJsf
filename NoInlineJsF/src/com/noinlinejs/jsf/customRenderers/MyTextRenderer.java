@@ -81,10 +81,11 @@ public class MyTextRenderer extends TextRenderer {
             MyRenderKitUtils.renderOnchange(context, component, false);
             // styleClass might have changed at this point
             styleClass = (String) component.getAttributes().get("styleClass");
+            styleClass = MyClientWidgetRenderer.writeCWidget(writer, component, styleClass);
+            
             if (null != styleClass) {
                 writer.writeAttribute("class", styleClass, "styleClass");
             }
-            MyClientWidgetRenderer.writeCWidget(writer, component);
             writer.endElement("input");
 
         } else if (isOutput = (component instanceof UIOutput)) {

@@ -86,14 +86,28 @@ public class MyAjaxBehaviorRenderer extends AjaxBehaviorRenderer {
         if( ! "click".equals(eventName) && ! "action".equals(eventName)){
         	String styleClass = (String) component.getAttributes().get("styleClass");
         	if(null == styleClass)
-        		styleClass = "";
+        		styleClass = "jsf-" + eventName;
         	else
-        		styleClass += " ";
-        	styleClass += "jsf-e-" + eventName;
+        		styleClass += " jsf-me" + eventName;
         	component.getAttributes().put("styleClass", styleClass);
-        }else{
+        	String onevt = (String) component.getAttributes().get("data-on" + eventName);
+        	if(null == onevt){
+        		onevt = "jsfajax";
+        	}else{
+        		onevt += " jsfajax";
+        	}
+        	writer.writeAttribute("data-on" + eventName, onevt, null);
         	writer.writeAttribute("data-jsf-event", eventName, null);
-        	writer.writeAttribute("data-jsfajax", "", null);
+
+        }else{
+        	String onclick = (String) component.getAttributes().get("data-onclick");
+        	if(null == onclick){
+        		onclick = "jsfajax";
+        	}else{
+        		onclick += " jsfajax";
+        	}
+        	component.getAttributes().put("data-onclick", onclick);
+        	writer.writeAttribute("data-jsf-event", eventName, null);
         }
 
         appendIds(component, writer, execute, "execute");

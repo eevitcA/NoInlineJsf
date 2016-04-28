@@ -170,12 +170,13 @@ public class MyButtonRenderer extends HtmlBasicRenderer {
         
         String styleClass = (String)
                 component.getAttributes().get("styleClass");
-          if (styleClass != null && styleClass.length() > 0) {
-              writer.writeAttribute("class", styleClass, "styleClass");
-          }
           
           // Used for helper js function like hide, show, toggleClass etc.
-          MyClientWidgetRenderer.writeCWidget(writer, component);
+        styleClass = MyClientWidgetRenderer.writeCWidget(writer, component, styleClass);
+        
+        if (styleClass != null && styleClass.length() > 0) {
+            writer.writeAttribute("class", styleClass, "styleClass");
+        }
 
         // PENDING(edburns): Prior to i_spec_1111, this element 
         // was rendered unconditionally

@@ -1,67 +1,64 @@
 "use strict";
 var doc = document;
 
-var noinlinejs = {
-	setClickEvents : function (){
+function setClickEvents(){
 		doc.body.addEventListener("click", function(e) {
-			var w;
-			//sets jsf ajax click events
-			if(e.target.hasAttribute("data-jsfajax")){
-				e.preventDefault();
-				this.jsfajax(e.target, e);
-			}
-			//sets client-widget click events
-			 w = e.target.getAttribute("data-c-widget");
-			if(w){
-				var s = w.split(" ");
-				var slength = s.length;
-				for(var i = 0; i < slength; i++){
-					this[s[i]](e.target, e);
-				}
-			}
-		}.bind(this));
-	},
+			execEvent(e, "click");
+		});
+	}
+
 	// jsf events other than than click .  evt listener is added when doc ready.
-	getJsfMobileEvts : function (){
+function getJsfMobileEvts(){
 		var events = ["blur","change","dblclick","focus","keydown","keypress","keyup","mousedown","mousemove","mouseout","mouseover","mouseup","select"];
 		var evLength = events.length;
 		for(var i = 0; i < evLength; i++){
-			var elems = doc.getElementsByClassName('jsf-e-' + events[i]);
+			var elems = doc.getElementsByClassName('data-on' + events[i]);
 			if(elems.length > 0){
-				this.addJsfEvtsToMobileEvts(elems, events[i]);
+				addJsfEvtsToMobileEvts(elems, events[i]);
 			}
 		}
-	},
-	addJsfEvtsToMobileEvts : function (elems, evt){
+	}
+
+function addJsfEvtsToMobileEvts (elems, evt){
 		var eLength = elems.length;
 		for(var i = 0; i < eLength; i++){
 			(function(i){
 				elems[i].addEventListener(evt, function(e){
 					e.preventDefault();
-					noinlinejs.jsfajax(elems[i], e, evt);
+					execEvent(e, evt);
 				});
 			})(i);
 		}
-	},
+	}
+function execEvent(event, eventName){
+	var w = event.target.getAttribute("data-on" + eventName);
+	if(w){
+		var s = w.split(" ");
+		var slength = s.length;
+		for(var i = 0; i < slength; i++){
+			window[s[i]](event.target, event);
+		}
+	}
+}
 	
-	jsfajax : function (elem, event, jsfEvent){
+function jsfajax (elem, event){
+		event.preventDefault();
 		var render = elem.getAttribute('data-render');
 		var execute =  elem.getAttribute('data-execute');
 		var op = {};
 		var onevent = elem.getAttribute('data-onevent');
 		var onerror = elem.getAttribute('data-onerror');
 		var delay = elem.getAttribute('data-delay');
+		var jsfEvent = elem.getAttribute('data-jsf-event');
 
 		if(elem.id == ""){
 			elem.id = elem.name;
 		}
-		
+
 		if(!jsfEvent){
-			jsfEvent = elem.getAttribute('data-jsf-event');
-			if(!jsfEvent){
-				jsfEvent = "click";
-			}
+			jsfEvent = "click";
 		}
+
 		if(render === null){
 			render = 0;
 		}else{
@@ -79,9 +76,9 @@ var noinlinejs = {
 		if(delay !== null){
 			op['delay'] = delay;
 		}
-		this.mojAb(elem, event, jsfEvent, execute, render, op);
-	},
-	mojAb : function(s, e, n, ex, re, op) {
+		mojAb(elem, event, jsfEvent, execute, render, op);
+	}
+function mojAb (s, e, n, ex, re, op) {
 	    if (!op) {
 	        op = {};
 	    }
@@ -98,40 +95,41 @@ var noinlinejs = {
 	        op["render"] = re;
 	    }
 	    jsf.ajax.request(s, e, op);
-	},
-	findTargetsId : function(e, trs){
+	}
+
+function findTargetsId (e, trs){
 		var trs = trs.split(" ");
 		var tlength = trs.length;
 		for(var i = 0; i < tlength; i++){
-			var tar = this.findTarget(e, trs[i]);
+			var tar = findTarget(e, trs[i]);
 			trs[i] = tar.id;
 		}
 		return trs.join(" ");
-	},
+	}
 	
-	findTargets : function (e, trs){
+function findTargets (e, trs){
 		var trs = trs.split(" ");
 		var tlength = trs.length;
 		for(var i = 0; i < tlength; i++){
-			trs[i] = this.findTarget(e, trs[i]);
+			trs[i] = findTarget(e, trs[i]);
 		}
 		return trs;
-	},
+	}
 	
-	findTarget : function (e, tr){
+function findTarget (e, tr){
 		if(tr.charAt(0) === '#'){
 			var target = tr.split(',');
 			switch(target[0]){
 				case '#this': return e;
-				case '#sibling': return this.findSibling(e, target[1]);
+				case '#sibling': return findSibling(e, target[1]);
 				case '#id' : return doc.getElementById(target[1]); 
 			}
 		}else{
 			return doc.getElementById(tr);
 		}
-	},
+	}
 	
-	findSibling : function(e,sibling){
+function findSibling (e,sibling){
 		var arr = sibling.split('-');
 		var t = e;
 		while(arr.length > 0){
@@ -146,63 +144,70 @@ var noinlinejs = {
 			arr.splice(0, 1);
 		}
 		return t;
-	},
+	}
 	
 	//widgets :
 	
 	//hides a target elem given by data-hide attribute
-	hider : function hider(elem){
+function hider(elem){
 					var targets = elem.getAttribute('data-hide');
-					targets = this.findTargets(elem, targets);
+					targets = findTargets(elem, targets);
 					var tlength = targets.length;
 					for(var i = 0; i < tlength; i++){
-						this.hideElem(targets[i]);	
+						hideElem(targets[i]);	
 					}
-				 },
+				 }
 	// makes target div visible , target given by data-show attr
-	shower : function shower(elem){
+function shower(elem){
 					var targets = elem.getAttribute('data-show');
-					targets = this.findTargets(elem, targets);
+					targets = findTargets(elem, targets);
 					var tlength = targets.length;
 					for(var i = 0; i < tlength; i++){
-						this.showElem(targets[i]);	
+						showElem(targets[i]);	
 					}
-				  },
+				  }
+
 	// focus on target field , target given by data-focus attr
-	focuser : function focuser(elem){
+function focuser(elem){
 					var targets = elem.getAttribute('data-focus');
-					targets = this.findTargets(elem, targets);
+					targets = findTargets(elem, targets);
 					var tlength = targets.length;
 					for(var i = 0; i < tlength; i++){
-						this.target.focus();	
+						target.focus();	
 					}
-				  },
+				  }
+
 	// toggles class on target elem , target given by data-tg-target attr
-	classToggler : function classToggler(elem){
+function classToggler(elem){
 							var className = elem.getAttribute('data-toggleClass');
 							var targets = elem.getAttribute('data-tg-target');
-							targets = this.findTargets(elem, targets);
+							targets = findTargets(elem, targets);
 							var tlength = targets.length;
 							for(var i = 0; i < tlength; i++){
-								this.toggleClass(targets[i], className);	
+								toggleClass(targets[i], className);	
 							}
-						},
-	show : function(id){
+						}
+
+function show(id){
 		doc.getElementById(id).style.display = "block";
-	},
-	showElem : function(e){
+	}
+
+function showElem(e){
 		e.style.display = "block";
-	},
-	hide : function hide(id){
+	}
+function hide(id){
 		doc.getElementById(id).style.display = "none";
-	},
-	hideElem : function(e){
+	}
+
+function hideElem(e){
 		e.style.display = "none";
-	},
-	hasClass : function(element, cls) {
+	}
+
+function hasClass(element, cls) {
 	    return (' ' + element.className + ' ').indexOf(' ' + cls + ' ');
-	},
-	toggleClass : function(e, cls){
+	}
+
+function toggleClass(e, cls){
 	    var classString = e.className;
 	    var nameIndex = classString.indexOf(cls);
 	    if (nameIndex == -1) {
@@ -212,11 +217,11 @@ var noinlinejs = {
 	        classString = classString.substr(0, nameIndex) + classString.substr(nameIndex + className.length);
 	    }
 	    e.className = classString;
-	},
-	focusElem : function(id){
+	}
+function focusElem(id){
 		doc.getElementById(id).focus();
 	}
-};
+
 
 // check if doc is ready (https://github.com/jfriend00/docReady/blob/master/docready.js)
 (function(funcName, baseObj) {
@@ -289,13 +294,12 @@ var noinlinejs = {
             readyEventHandlersInstalled = true;
         }
     }
-})("docReady", noinlinejs);
+})("docReady", window);
 
-noinlinejs.docReady(function(){
-	(function(){
-		noinlinejs.setClickEvents();
-		noinlinejs.getJsfMobileEvts();
-	})();
+docReady(function(){
+	console.log('hi');
+	setClickEvents();
+	getJsfMobileEvts();
 });
 
 

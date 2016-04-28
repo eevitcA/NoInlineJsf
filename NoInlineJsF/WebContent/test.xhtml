@@ -9,14 +9,13 @@
 
 <ui:composition >
 	<h:outputScript name="scripts/jjsf.js"/>
-	<h:outputScript name="scripts/utils.js"/>
-	<h:outputScript name="scripts/template.js"/>
+	<h:outputScript name="scripts/noinlinejs.js"/>
 	
 	<h:form>
 		<h:panelGroup id="art" layout="article">
-		
-			<h:panelGroup data-c-widget="shower hider" data-show="#sibling,next-next" data-hide="#sibling,next">
-			click
+			<h:panelGroup data-onmouseover="shower hider" data-show="#sibling,next-next" data-hide="#sibling,next">
+				<f:ajax event="click" listener="#{test.test}"/>
+				click
 			</h:panelGroup>
 			
 			<h:panelGroup id="cc1">
