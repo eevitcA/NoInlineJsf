@@ -1,6 +1,6 @@
 {
   "name": "noinlinejs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "This is a project that aims to remove inline javascript from JSF framework",
   "main": "gulpfile.js",
   "scripts": {
