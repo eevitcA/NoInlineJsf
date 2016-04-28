@@ -15,16 +15,15 @@
 	<h:form>
 		<h:panelGroup id="art" layout="article">
 		
-			<h:panelGroup data-c-widget="shower" data-show="#sibling,next">
-			<f:ajax event="click" listener="#{test.sayHi}"/>
-			ss
+			<h:panelGroup data-c-widget="shower hider" data-show="#sibling,next-next" data-hide="#sibling,next">
+			click
 			</h:panelGroup>
 			
-			<h:panelGroup id="cc1" style="display:none;">
-				ll
+			<h:panelGroup id="cc1">
+				hide
 			</h:panelGroup>
 			<h:panelGroup id="cc2" style="display:none;">
-				ll
+				show
 			</h:panelGroup>
 		</h:panelGroup>
 	</h:form>
